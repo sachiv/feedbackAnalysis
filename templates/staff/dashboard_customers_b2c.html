@@ -1,0 +1,99 @@
+{% extends 'staff/base.html' %} {% block title %}B2C Customers | Dashboard{% endblock %} {% block content %} {% load staticfiles %} {% load get_range %}
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{error}}
+        </div>
+        {% elif success %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{success}}
+        </div>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Select Restaurant</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'staff_dashboard_customers_b2c'%}">
+                    {% csrf_token %}
+                    <select id="bentity" class="form-control" name="bentity" required>
+                        <option value="0">Restaurant</option>
+                        {% for b_entity in bentity_list %}
+                        <option value="{{b_entity.pk}}">{{b_entity}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">SELECT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="text-center">
+            <div class="h2">
+                {{b_entity.name}} CUSTOMERS LIST
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover text-center gg-table">
+                <thead>
+                    <tr>
+                        <td colspan="4">
+                            <div class="h4">Customer</div>
+                        </td>
+                        <td colspan="2">
+                            <div class="h4">Latest Feedback</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>Mobile</td>
+                        <td>No. of Feedbacks</td>
+                        <td>Comment</td>
+                        <td>Timestamp</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers%}
+                    <tr>
+                        <td>{{customer.customer.get_full_name|title}}</td>
+                        <td>{{customer.customer.email}}</td>
+                        <td>{{customer.customer.mobile}}</td>
+                        <td>{{customer.nb_feedbacks}}</td>
+                        <td>{{customer.feedback.comment}}</td>
+                        <td>{{customer.feedback.timestamp}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if customers %}
+    <div class="text-center">
+        <ul class="pagination">
+            {% if customers.has_previous %}
+                <li>
+                    <a href="?page={{ customers.previous_page_number }}">«</a>
+                </li>
+            {% endif %}
+            {% for i in customers.paginator.num_pages|get_range %}
+                {% if i > 0 %}
+                <li {% if customers.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if customers.has_next %}
+                <li>
+                    <a href="?page={{ customers.next_page_number }}">»</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

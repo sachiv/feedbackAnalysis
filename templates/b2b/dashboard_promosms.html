@@ -1,0 +1,189 @@
+{% extends 'b2b/base.html' %} {% block title %}Promo SMS | Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="text-center">
+        <a href="{% url 'dashboard_promosms_history'%}" class="btn btn-raised btn-lg btn-primary">
+           PROMO SMS HISTORY
+       </a>
+    </div>
+    {% if account_error %}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{account_error}}
+    </div>
+    {% endif %} {% if not account_error %}
+    <div class="col-xs-12 text-center">
+        <hr>
+        <div class="h3">PROMO SMS STATUS</div>
+        <div class="h4">BALANCE LEFT: {{asset_account.sms_promo}}</div>
+        <div class="h4">VALIDITY: {{asset_account.sms_promo_validity}}</div>
+        <hr>
+    </div>
+    {% endif %}
+    <div class="col-sm-offset-3 col-sm-6">
+        {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{error}}
+        </div>
+        {% elif success %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{success}}
+        </div>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Add Promo SMS Template</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'dashboard_promosms'%}">
+                    {% csrf_token %}
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="title">Template Name*</label>
+                        <input class="form-control" id="title" name="title" type="text" maxlength="100" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label for="content" class="control-label">Content*</label>
+                        <textarea class="form-control" rows="3" id="content" name="content" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">ADD PROMO SMS TEMPLATE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="text-center">
+            <div class="h2">
+                PROMO SMS TEMPLATES LIST
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        {% if not account_error %}
+                        <th>SELECT</th>{% endif %}
+                        <th>ACTIVE</th>
+                        <th>TITLE</th>
+                        <th>CONTENT</th>
+                        <th>UPDATED AT</th>
+                        <th>CREATED AT</th>
+                        <th>DELETE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for promosms in promosms_list %}
+                    <tr>
+                        {% if not account_error %}
+                        <td>
+                            <div class="radio radio-primary">
+                                <label>
+                                    <input name="template" type="radio" class="promo_template_id" value="{{promosms.pk}}" {% if not promosms.active %}disabled {%endif%}>
+                                </label>
+                            </div>
+                        </td>
+                        {% endif %}
+                        <td>{{promosms.active}}</td>
+                        <td>{{promosms.title}}</td>
+                        <td>{{promosms.content|linebreaks}}</td>
+                        <td>{{promosms.updated_at}}</td>
+                        <td>{{promosms.created_at}}</td>
+                        <td>
+                            <form method="POST" action="{%url 'dashboard_promosms'%}">
+                                {% csrf_token %}
+                                <input type="hidden" name="promosms_pk" value="{{promosms.pk}}">
+                                <button type="submit" name="submit" value="delete_promo" class="btn btn-danger btn-fab btn-fab-mini" title="Delete"><i class="material-icons">&#xE872;</i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <hr> {% if expired or account_error%}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{expired}}{{account_error}}
+        </div>
+        {% else %}
+        <div class="text-center h2">
+            SELECT CUSTOMERS
+        </div>
+        <hr>
+        <div class="well">
+            <div class="row">
+                <form method="POST" action="{%url 'dashboard_promosms_customers'%}">
+                    {% csrf_token %}
+                    <div class="col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="all"> All Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="happy"> Happy Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="unhappy"> Unhappy Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="comment"> Comment Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="no_comment"> No - Comment Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="returning"> Returning Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="no_returning"> Non - Returning Customers
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="text-center">
+                            <button name="submit" value="send_sms_filter" class="btn btn-lg btn-raised btn-primary">SEND SMS</button>
+                        </div>
+                        <input type="hidden" name="template_id" class="template_id">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center h4">OR</div>
+        <form method="POST" action="{%url 'dashboard_promosms_customers'%}">
+            {% csrf_token %}
+            <div class="col-xs-12 text-center">
+                <input type="hidden" name="template_id" class="template_id">
+                <button type="submit" name="submit" class="btn btn-sm btn-raised btn-primary">SELECT INDIVIDUAL CUSTOMERS</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

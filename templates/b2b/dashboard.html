@@ -1,0 +1,366 @@
+{% extends 'b2b/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="col-xs-12 col-sm-6 col-md-4">
+    <div id="sidebar" class="siderbar panel">
+        <div class="user-details list-group">
+            <div class="list-group-item">
+                <div class="row-action-primary">
+                    <i class="material-icons">&#xE7FD;</i>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><div class="h2">{{incharge.user.get_full_name|title}}</div></h4>
+                    <p class="list-group-item-text">Incharge | {{incharge.b_entity.name}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="btn-group btn-group-justified btn-group-raised sidebar-options" title="Promotional SMS">
+            <a href="{% url 'dashboard_promosms' %}" class="btn btn-primary">
+                <i class="material-icons">&#xE8F6;</i>
+                <p>PROMO SMS</p>
+            </a>
+            <a href="{%url 'dashboard_nfa'%}" class="btn btn-info" title="Negative Feedback Alert">
+                <i class="material-icons">&#xE160;</i>
+                <p>NFA</p>
+            </a>
+            <a href="{%url 'dashboard_employees'%}" class="btn btn-primary" title="Employee List">
+                <i class="material-icons">&#xEB49;</i>
+                <p>Employees</p>
+            </a>
+        </div>
+        <ul id="newsTicker" class="list-group cmt-list cmtList">
+            {% for d in data%}
+            <li class="list-group-item">
+
+                <div class="row-action-primary">
+                    <div class="circle-box {% if d.7 <= 2 %} circle-box-info {%endif%}">
+                        {{d.7|floatformat:1}}
+                    </div>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><a href="{%url 'dashboard_customer' d.0.customer.pk %}">{{d.0.customer.get_full_name|title}}</a></h4>
+                    <p class="list-group-item-text">
+                        {{d.0.comment}}
+                    </p>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="{%url 'dashboard_employee' d.0.employee.pk %}"><i class="material-icons">&#xEB49;</i> {{d.0.employee}}</a>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <small>{{d.0.timestamp}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{%url 'dashboard_feedbacks_glimpse'%}">
+            <div class="btn btn-lg btn-block btn-info btn-raised more-btn">MORE</div>
+        </a>
+    </div>
+    <!-- sidebar panel -->
+    <a href="{%url 'dashboard_bentity'%}">
+        <div class="btn btn-raised btn-block btn-primary">
+            <i class="material-icons">&#xE84F;</i> Balance Left: Rs. {{balance}}/-
+        </div>
+    </a>
+    <div class="btn btn-raised btn-block btn-info">
+        <i class="material-icons">&#xE627;</i> Last Sync: {{data.0.0.timestamp}}
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn btn-raised btn-block btn-primary">
+                <div class="h1">{{stats.total.overall_rating|floatformat:1}}</div>
+                Overall Rating
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <a href="{% url 'dashboard_feedbacks'%}">
+                <div class="btn btn-raised btn-block btn-primary border-bottom no-margin-bottom">
+                    <div class="h1">{{stats.today.nb_feedbacks}}</div>
+                    Today's Feedbacks
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-primary no-margin-top">
+                            <div class="h1">{{stats.today.nb_greens}}</div>
+                            Happy
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-info no-margin-top">
+                            <div class="h1">{{stats.today.nb_greys}}</div>
+                            Unhappy
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12">
+            <a href="{% url 'dashboard_feedbacks'%}">
+                <div class="btn btn-raised btn-block btn-primary border-bottom no-margin-bottom">
+                    <div class="h1">{{stats.total.nb_feedbacks}}</div>
+                    Total Feedbacks
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-primary no-margin-top">
+                            <div class="h1">{{stats.total.nb_greens}}</div>
+                            Happy
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-info no-margin-top">
+                            <div class="h1">{{stats.total.nb_greys}}</div>
+                            Unhappy
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12">
+            <a href="{% url 'dashboard_customers'%}">
+                <div class="btn btn-raised btn-block btn-primary border-bottom no-margin-bottom">
+                    <div class="h1">{{stats.total.nb_customers}}</div>
+                    Total Customers
+                </div>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <div class="h3"><i class="material-icons">&#xE7E9;</i> UPCOMING BIRTHDAYS</div>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {% for bday in bdays %}
+                <li class="list-group-item">
+                    <div class="h4"><a href="{%url 'dashboard_customer' bday.pk %}">{{bday.get_full_name|title}}</a><div class="pull-right">{{bday.dt_bday}}</div></div>
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{%url 'dashboard_customers'%}">
+            <div class="btn btn-lg btn-block btn-info btn-raised more-btn">MORE</div>
+        </a>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <div class="h3"><i class="material-icons">&#xE7E9;</i> UPCOMING ANNIVERSARIES</div>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {% for anni in annis %}
+                <li class="list-group-item">
+                    <div class="h4"><a href="{%url 'dashboard_customer' anni.pk %}">{{anni.get_full_name|title}}</a><div class="pull-right">{{anni.dt_anni}}</div></div>
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{%url 'dashboard_customers'%}">
+            <div class="btn btn-lg btn-block btn-info btn-raised more-btn">MORE</div>
+        </a>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-8">
+    <div class="preloader-wrapper">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <ul class="nav nav-pills nav-justified">
+        <li id="timeDaily">
+            <a href="javascript:void(0)">
+                <div class="h4">DAILY</div>
+            </a>
+        </li>
+        <li id="timeWeekly">
+            <a href="javascript:void(0)">
+                <div class="h4">WEEKLY</div>
+            </a>
+        </li>
+        <li id="timeMonthly">
+            <a href="javascript:void(0)">
+                <div class="h4">MONTHLY</div>
+            </a>
+        </li>
+        <li id="timeYearly">
+            <a href="javascript:void(0)">
+                <div class="h4">YEARLY</div>
+            </a>
+        </li>
+        <li id="timeDay">
+            <a href="javascript:void(0)">
+                <div class="h4">TODAY</div>
+            </a>
+        </li>
+        <li id="timeWeek">
+            <a href="javascript:void(0)">
+                <div class="h4">WEEK</div>
+            </a>
+        </li>
+        <li class="active" id="timeMonth">
+            <a href="javascript:void(0)">
+                <div class="h4">MONTH</div>
+            </a>
+        </li>
+        <li id="timeYear">
+            <a href="javascript:void(0)">
+                <div class="h4">YEAR</div>
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <div class="col-xs-12">
+        <div class="panel dash-chart-cover" id="dashChartCover">
+            <div class="panel-body">
+                <div class="col-xs-2 text-light">
+                    <small><b>STATISTICS</b></small>
+                </div>
+                <!--<div class="col-xs-10">
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active" id="OVERALL"><a href="#"><small><b>OVERALL</b></small></a></li>
+                        <li role="presentation" id="QS1"><a href="#"><small><b>AMBIENCE</b></small></a></li>
+                        <li role="presentation" id="QS2"><a href="#"><small><b>COST</b></small></a></li>
+                        <li role="presentation" id="QS3"><a href="#"><small><b>FOOD</b></small></a></li>
+                        <li role="presentation" id="QS4"><a href="#"><small><b>SERVICE</b></small></a></li>
+                    </ul>
+                </div>-->
+                <div id="dashChart" style="height:400px;"></div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-body">
+                <div class="col-xs-6 text-light">
+                    <small><b>RATINGS</b></small>
+                </div>
+                <div id="ratingDashChart" style="height:400px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="panel text-center">
+                    <div class="panel-body">
+                        <div id="qs1Chart" style="height:150px;"></div>
+                        <div class="h3">Ambience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div id="QS2" class="panel text-center">
+                    <div class="panel-body">
+                        <div id="qs2Chart" style="height:150px;"></div>
+                        <div class="h3">Cost</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div id="QS3" class="panel text-center">
+                    <div class="panel-body">
+                        <div id="qs3Chart" style="height:150px;"></div>
+                        <div class="h3">Food</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div id="QS4" class="panel text-center">
+                    <div class="panel-body">
+                        <div id="qs4Chart" style="height:150px;"></div>
+                        <div class="h3">Service</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div id="QD1" class="panel text-center">
+                    <div class="panel-body">
+                        <div id="qd1Chart" style="height:150px;"></div>
+                        <div class="h3">{{incharge.b_entity.qd1_text}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div id="QD2" class="panel text-center">
+                    <div class="panel-body">
+                        <div id="qd2Chart" style="height:150px;"></div>
+                        <div class="h3">{{incharge.b_entity.qd2_text}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="panel">
+                    <div class="panel-body">
+                        <small><b>CUSTOM QUESTIONS</b></small>
+                        <div class="pull-right"><a href="#"><i class="material-icons">&#xE889;</i></a>&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE3C9;</i></a></div>
+                        <ol>
+                            <li class="h3">{{incharge.b_entity.qd1_text}}</li>
+                            <li class="h3">{{incharge.b_entity.qd2_text}}</li>
+                        </ol>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{%url 'dashboard_custom_questions_edit'%}" method="POST">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Custom Questions</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="qd1">Custome Question 1*</label>
+                        <input class="form-control" value="{{incharge.b_entity.qd1_text}}" id="qd1" name="qd1" type="text" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="qd2">Custome Question 2*</label>
+                        <input class="form-control" value="{{incharge.b_entity.qd2_text}}" id="qd2" name="qd2" type="text" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block script %}
+{% if pk == 0 %}
+<script>
+    $(function () {
+        $.getJSON("{% url 'dashboard_json' %}", function (data) {
+            loadDashboard(data);
+        }).done(function () {
+            $('.preloader-wrapper').fadeOut()
+        })
+    })
+</script>
+{% else %}
+<script>
+    $(function () {
+        $.getJSON("{% url 'dashboard_json_pk' pk %}", function (data) {
+            loadDashboard(data);
+        }).done(function () {
+            $('.preloader-wrapper').fadeOut()
+        })
+    })
+</script>
+{% endif %}
+{% endblock %}

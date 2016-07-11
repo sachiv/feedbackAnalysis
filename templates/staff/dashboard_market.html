@@ -1,0 +1,54 @@
+{% extends 'staff/base.html' %} {% block title %}Market | Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="col-xs-12">
+        <div class="text-center">
+            <div class="h2">
+                PRODUCT LIST
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="6" class="text-center h4">PRODUCT</th>
+                        <th colspan="3" class="text-center h4">PRICE</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>CATEGORY</th>
+                        <th>STOCK</th>
+                        <th>ACTIVE</th>
+                        <th>DESCRIPTION</th>
+                        <th>PRICE</th>
+                        <th>UNITS</th>
+                        <th>VALIDITY</th>
+                        <th>BUY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{product.product_id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{% if product.unlimited_stock %} Unlimited {%else%} {{product.stock}} {%endif%}</td>
+                        <td>{{product.active}}</td>
+                        <td>{{product.description|linebreaks}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{% if product.unlimited_unit %} Unlimited {%else%} {{product.unit}} {%endif%}</td>
+                        <td>{% if product.unlimited_validity %} Unlimited {%else%} {{product.validity}} {%endif%}</td>
+                        <td>
+                            <a href="{% url 'staff_dashboard_buy' pk=product.pk %}">
+                                <button class="btn btn-raised btn-primary">BUY</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

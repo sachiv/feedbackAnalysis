@@ -1,0 +1,77 @@
+{% extends 'b2b/base.html' %} {% block title %}Profile Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Edit Profile</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'dashboard_profile_edit'%}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="first_name">First Name*</label>
+                                <input class="form-control" value="{{user.first_name}}" id="first_name" name="first_name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="last_name">Last Name*</label>
+                                <input class="form-control" value="{{user.last_name}}" id="last_name" name="last_name" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="mobile">Mobile*</label>
+                        <input class="form-control" value="{{profile.mobile}}" pattern="^[789]\d{9}$" id="mobile" name="mobile" type="text" maxlength="10" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="email">Email*</label>
+                        <input class="form-control" value="{{user.email}}" id="email" name="email" type="email" required>
+                    </div>
+                    <hr>
+                    <div class="h4">Address</div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="street">Street</label>
+                        <textarea class="form-control" id="street" name="street" type="text" rows="5">{{profile.address.street}}</textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="city">City</label>
+                                <input class="form-control" value="{{profile.address.city}}" id="city" name="city" type="text" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="state">State</label>
+                                <input class="form-control" value="{{profile.address.state}}" id="state" name="state" type="text" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="country">Country</label>
+                                <input class="form-control" value="India" id="country" name="country" type="text" maxlength="50" disabled>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="zip_code">Zip Code</label>
+                                <input class="form-control" value="{{profile.address.zip_code}}" id="zip_code" name="zip_code" pattern="^\d{6}$" type="text" maxlength="6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'staff/base.html' %} {% block title %}Daily Reports{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    {% if error %}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{error}}
+    </div>
+    {% elif success %}
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{success}}
+    </div>
+    {% endif %}
+</div>
+<div class="col-sm-2">
+    <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+        <li id="allFilter" class="active"><a href="javascript:void(0)">ALL</a></li>
+        <hr>
+        <li id="greenFilter"><a href="javascript:void(0)">GREEN RESTAURANTS</a></li>
+        <li id="greyFilter"><a href="javascript:void(0)">GREY RESTAURANTS</a></li>
+        <hr>
+        <li id="commentFilter"><a href="javascript:void(0)">FEEDBACKS</a></li>
+        <li id="nocommentFilter"><a href="javascript:void(0)">NO FEEDBACKS</a></li>
+    </ul>
+</div>
+<div class="col-sm-10">
+    <div class="text-center">
+        <div class="h1">RESTAURANTS</div>
+    </div>
+    <div class="text-center">
+        <form method="POST" action="{%url 'staff_dashboard_reports'%}">
+            {% csrf_token %}
+            <div class="text-center">
+                <button name="submit" value="send_reports" class="btn btn-lg btn-raised btn-primary">SEND REPORTS</button>
+            </div>
+            <input type="hidden" name="template_id" value="{{template_id}}">
+            <div class="table-responsive">
+                <table class="table table-hover text-center gg-table">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">
+                                <div class="h4">RESTAURANT</div>
+                            </th>
+                            <th colspan="4" class="text-center">
+                                <div class="h4">STATS</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="selectAll">
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">No. of Feedbacks</th>
+                            <th class="text-center">No. of Greens</th>
+                            <th class="text-center">No. of Greys</th>
+                            <th class="text-center">Overall Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b_entity in bentity_list %}
+                        <tr class="{% if b_entity.overall_rating < 2 %}grey{% else %}green{%endif%} {% if b_entity.nb_feedbacks > 0 %}comment{%else%}nocomment{%endif%}">
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="pk" value="{{b_entity.pk}}">
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{b_entity.name|title}}</td>
+                            <td>{{b_entity.nb_feedbacks}}</td>
+                            <td>{{b_entity.nb_greens}}</td>
+                            <td>{{b_entity.nb_greys}}</td>
+                            <td>
+                                <div class="label {% if b_entity.overall_rating < 2 %}label-info{% else %}label-primary{%endif%}">{{b_entity.overall_rating}}</div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

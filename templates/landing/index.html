@@ -1,0 +1,274 @@
+{% extends 'landing/base.html' %} {% block content %} {% load staticfiles %}
+<header class="masthead">
+    <div class="slider-container backgroundCover" id="slider" style="background-image: url({% static 'landing/img/back-slider2.jpg' %});">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row mh-container text-center">
+                <img class="logo-header img-responsive" src="{% static 'landing/img/logo-title-lg.png' %}" alt="FeedbackAnalysis">
+                <h3>Feedback Analysis</h3>
+                <div class="col-md-10 col-md-push-1 hidden-xs mh-slider">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a href="#" target="_blank" class="btn btn-default side">Download now!</a>
+                        </div>
+                        <div class="col-sm-4">
+                            <div id="carousel-slider" class="carousel slide" data-ride="carousel" style="background-image: url({% static 'landing/img/nexus.png' %});">
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="{% static 'landing/img/slide.jpg' %}" alt="Slide 1" class="img-responsive">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{% static 'landing/img/slide1.jpg' %}" alt="Slide 2" class="img-responsive">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{% static 'landing/img/slide2.jpg' %}" alt="Slide 3" class="img-responsive">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{% static 'landing/img/slide3.jpg' %}" alt="Slide 4" class="img-responsive">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#" class="btn btn-empty side">learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-static-top" id="nav" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'landing/img/logo-s.png' %}" alt="Logo">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav social hidden-xs hidden-sm">
+                    <!--
+                    <li><a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a></li>
+-->
+                    <li><a href="#" target="_blank"><i class="fa fa-facebook fa-lg fa-fw"></i></a></li>
+                    <!--
+                    <li><a href="#"><i class="fa fa-pinterest fa-lg fa-fw"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin fa-lg fa-fw"></i></a></li>
+-->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#slider">Home</a></li>
+                    <li><a href="#about">about</a></li>
+                    <li><a href="#download">download</a></li>
+                    <li><a href="#features">features</a></li>
+                    <li><a href="#contact">contact</a></li>
+                    <li><a href="{% url 'login' %}">login</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!--/.container -->
+    </div>
+    <!--/.navbar -->
+
+</header>
+
+<section id="about">
+    <div class="container">
+        <div class="col-md-7">
+            <img src="{% static 'landing/img/weather.png' %}" alt="Weather" class="scrollpoint sp-effect3">
+            <h2 class="scrollpoint sp-effect3">About <span>Us</span></h2>
+            <p class="first">Customer Feedback Analysis App powered by Django</p>
+            <div class="h4 text-center">
+                CUSTOMER IS KING
+            </div>
+        </div>
+        <div class="col-md-5 scrollpoint sp-effect5">
+            <img class="img-responsive" src="{% static 'landing/img/logo-title-lg.png' %}" class="img-responsive hidden-xs iphone-settings" alt="Mobile">
+        </div>
+    </div>
+</section>
+
+<section id="download">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-push-1">
+                <h1>Our <span>Android App</span> Download</h1>
+            </div>
+
+            <div class="btn-group btn-group-justified btn-lg">
+                <div class="row">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <div class="row">
+                            <div class="btn-group scrollpoint sp-effect4">
+                                <a href="#" target="_blank" class="btn btn-default">
+                                    <span class="playstore"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-push-2 clearfix">
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h3>Our <span>features</span></h3>
+                    <span class="divider"></span>
+                    <p>We have a solution to all of your problems</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="feature scrollpoint sp-effect2">
+                                        <div class="icon">
+                                            <i class="fa fa-clipboard fa-4x"></i>
+                                        </div>
+                                        <h4>Customize your Surveys</h4>
+                                        <p>Help Restaurant owners to add relevant questions based on requirement relating to the products &amp; services oﬀered by their establishment.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="feature scrollpoint sp-effect2">
+                                        <div class="icon">
+                                            <i class="fa fa-line-chart fa-4x"></i>
+                                        </div>
+                                        <h4>Real Time Analytics</h4>
+                                        <p>One dashboard to understand your customer behaviour through better analysis reports.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="feature scrollpoint sp-effect1">
+                                        <div class="icon">
+                                            <i class="fa fa-exclamation-circle fa-4x"></i>
+                                        </div>
+                                        <h4>Alert on NEGATIVE FEEDBACK</h4>
+                                        <p>We will automatically send an Email and SMS when a customer gives a negative feedback.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="feature scrollpoint sp-effect1">
+                                        <div class="icon">
+                                            <i class="fa fa-check fa-4x"></i>
+                                        </div>
+                                        <h4>Branding</h4>
+                                        <p>We Feedback tool enables you to customize the total look and feel according to your own brand.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="feature scrollpoint sp-effect1">
+                                        <div class="icon">
+                                            <i class="fa fa-weixin fa-4x"></i>
+                                        </div>
+                                        <h4>Comment Section</h4>
+                                        <p>Comment section allows your customers to enter their experiences.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="feature scrollpoint sp-effect1">
+                                        <div class="icon">
+                                            <i class="fa fa-wifi fa-4x"></i>
+                                        </div>
+                                        <h4>Capture Feedback Without WiFi</h4>
+                                        <p> We provide you with an option to Store Feedbacks locally in device and then Sync Later to cloud server.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="feature scrollpoint sp-effect1">
+                                        <div class="icon">
+                                            <i class="fa fa-mobile fa-4x"></i>
+                                        </div>
+                                        <h4>SCHEDULE PROMOTIONAL SMS</h4>
+                                        <p>Deliver Discount Deals, Miss you message to increase footfall at your resturant whenever you wish to do so.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-push-2 clearfix">
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h3><span> Get in touch with</span> Us</h3>
+                    <span class="divider"></span>
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <div class="row">
+                    <!--
+                    <div class="col-md-4">
+                        <i class="fa fa-mobile fa-5x"></i>
+                        <div class="h4">9045321000, 9582267199</div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <i class="fa fa-envelope fa-5x"></i>
+                        <a href="mailto:blablabla@gmail.com" target="_blank" style="color:inherit">
+                            <div class="h4">blablabla@gmail.com</div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <i class="fa fa-home fa-5x"></i>
+                        <div class="h4">Home Sweet Home</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="social">
+                    <ul>
+                        <!--
+                        <li><a href="#"><i class="fa fa-google-plus fa-lg"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter fa-lg"></i></a></li>
+-->
+                        <li><a href="#" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+                        <!--
+                        <li><a href="#"><i class="fa fa-pinterest fa-lg"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin fa-lg"></i></a></li>
+-->
+                    </ul>
+                </div>
+                <p class="rights">
+                    <i class="fa fa-copyright"></i> 2016 <span>Feedback Analysis</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

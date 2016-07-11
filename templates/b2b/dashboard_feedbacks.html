@@ -1,0 +1,120 @@
+{% extends 'b2b/base.html' %} {% block title %}Feedbacks{% endblock %} {% block content %} {% load staticfiles %} {% load get_range %}
+<div class="col-sm-2">
+    <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+        <li id="allFilter" class="active"><a href="javascript:void(0)">ALL</a></li>
+        <hr>
+        <li id="greenFilter"><a href="javascript:void(0)">HAPPY CUSTOMERS</a></li>
+        <li id="greyFilter"><a href="javascript:void(0)">UNHAPPY CUSTOMERS</a></li>
+        <hr>
+        <li id="commentFilter"><a href="javascript:void(0)">COMMENTS</a></li>
+        <li id="nocommentFilter"><a href="javascript:void(0)">NO COMMENTS</a></li>
+        <hr>
+        <li id="starFilter"><a href="javascript:void(0)">STARRED</a></li>
+        <li id="unstarFilter"><a href="javascript:void(0)">UNSTARRED</a></li>
+    </ul>
+</div>
+<div class="col-sm-10">
+    <div class="text-center">
+         <div class="h1">Feedbacks</div>
+        <ul class="pagination">
+            {% if data.has_previous %}
+                <li>
+                    <a href="?page={{ data.previous_page_number }}">«</a>
+                </li>
+            {% endif %}
+            {% for i in data.paginator.num_pages|get_range %}
+                {% if i > 0 %}
+                <li {% if data.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if data.has_next %}
+                <li>
+                    <a href="?page={{ data.next_page_number }}">»</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover text-center gg-table">
+            <thead>
+                <tr>
+                    <td colspan="3">
+                        <div class="h4">Customer</div>
+                    </td>
+                    <td colspan="7">
+                        <div class="h4">Ratings</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Star</td>
+                    <td>Name</td>
+                    <td>Ambience</td>
+                    <td>Cost</td>
+                    <td>Food</td>
+                    <td>Service</td>
+                    <td>Custom 1</td>
+                    <td>Custom 2</td>
+                    <td>Overall</td>
+                    <td>Comment</td>
+                    <td>Employee</td>
+                    <td>Timestamp</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data%}
+                <tr class="{% if d.7 < 2 %}grey{% else %}green{%endif%} {% if d.0.comment != '' %}comment{%else%}nocomment{%endif%} {% if d.0.importance %}starred{%else%}unstarred{% endif %}">
+                    <td>
+                        <div class="togglebutton">
+                            <label>
+                                <input class="toggleStar" name="{{d.0.pk}}" type="checkbox" {% if d.0.importance %}checked {% endif %}>
+                            </label>
+                        </div>
+                    </td>
+                    <td><a href="{%url 'dashboard_customer' d.0.customer.pk %}">{{d.0.customer.get_full_name|title}}</a></td>
+                    <td>{{d.1}}</td>
+                    <td>{{d.2}}</td>
+                    <td>
+                        <div class="label label-{% if d.3 <= 2 %}info{% else %}primary{%endif%}">{{d.3}}</div>
+                    </td>
+                    <td>
+                        <div class="label label-{% if d.4 <= 2 %}info{% else %}primary{%endif%}">{{d.4}}</div>
+                    </td>
+                    <td>{{d.5}}</td>
+                    <td>{{d.6}}</td>
+                    <td>
+                        <div class="label label-{% if d.7 <= 2 %}info{% else %}primary{%endif%}">{{d.7|floatformat:1}}</div>
+                    </td>
+                    <td>{{d.0.comment}}</td>
+                    <td>
+                        <a href="{%url 'dashboard_employee' d.0.employee.pk %}">
+                            <div class="label label-{% if d.4 <= 2 %}info{% else %}primary{%endif%}">{{d.0.employee}}</div>
+                        </a>
+                    </td>
+                    <td>{{d.0.timestamp}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <ul class="pagination">
+            {% if data.has_previous %}
+                <li>
+                    <a href="?page={{ data.previous_page_number }}">«</a>
+                </li>
+            {% endif %}
+            {% for i in data.paginator.num_pages|get_range %}
+                {% if i > 0 %}
+                <li {% if data.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if data.has_next %}
+                <li>
+                    <a href="?page={{ data.next_page_number }}">»</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

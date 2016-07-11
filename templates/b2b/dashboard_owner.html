@@ -1,0 +1,206 @@
+{% extends 'b2b/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="col-xs-12 col-sm-6 col-md-4">
+    <div id="sidebar" class="siderbar panel">
+        <div class="user-details list-group">
+            <div class="list-group-item">
+                <div class="row-action-primary">
+                    <i class="material-icons">&#xE7FD;</i>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><div class="h2">{{user.get_full_name|title}}</div></h4>
+                    <p class="list-group-item-text">Owner</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="btn-group btn-group-justified btn-group-raised sidebar-options" title="Promotional SMS">
+            <a href="{% url 'dashboard_promosms' %}" class="btn btn-primary">
+                <i class="material-icons">&#xE8F6;</i>
+                <p>PROMO SMS</p>
+            </a>
+            <a href="{%url 'dashboard_nfa'%}" class="btn btn-info" title="Negative Feedback Alert">
+                <i class="material-icons">&#xE160;</i>
+                <p>NFA</p>
+            </a>
+            <a href="{%url 'dashboard_employees'%}" class="btn btn-primary" title="Employee List">
+                <i class="material-icons">&#xEB49;</i>
+                <p>Employees</p>
+            </a>
+        </div>
+        <ul id="newsTicker" class="list-group cmt-list cmtList">
+            {% for feedback in feedbacks %}
+            <li class="list-group-item">
+                <div class="row-action-primary">
+                    <div class="circle-box {% if d.7 <= 2 %} circle-box-info {%endif%}">
+                        {{feedback.get_overall_rating|floatformat:1}}
+                    </div>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><a href="{%url 'dashboard_customer' feedback.customer.pk %}">{{feedback.customer.get_full_name|title}}</a></h4>
+                    <p class="list-group-item-text">
+                        {{feedback.comment}}
+                    </p>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="{%url 'dashboard_employee' feedback.employee.pk %}"><i class="material-icons">&#xEB49;</i> {{feedback.employee}}</a>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <small>{{feedback.timestamp}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{%url 'dashboard_feedbacks_glimpse'%}">
+            <div class="btn btn-lg btn-block btn-info btn-raised more-btn">MORE</div>
+        </a>
+    </div>
+    <!-- sidebar panel -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn btn-raised btn-block btn-primary">
+                <div class="h1">{{stats.total.overall_rating|floatformat:1}}</div>
+                Overall Rating
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <a href="{% url 'dashboard_feedbacks'%}">
+                <div class="btn btn-raised btn-block btn-primary border-bottom no-margin-bottom">
+                    <div class="h1">{{stats.today.nb_feedbacks}}</div>
+                    Today's Feedbacks
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-primary no-margin-top">
+                            <div class="h1">{{stats.today.nb_greens}}</div>
+                            Happy
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-info no-margin-top">
+                            <div class="h1">{{stats.today.nb_greys}}</div>
+                            Unhappy
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12">
+            <a href="{% url 'dashboard_feedbacks'%}">
+                <div class="btn btn-raised btn-block btn-primary border-bottom no-margin-bottom">
+                    <div class="h1">{{stats.total.nb_feedbacks}}</div>
+                    Total Feedbacks
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-primary no-margin-top">
+                            <div class="h1">{{stats.total.nb_greens}}</div>
+                            Happy
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="btn btn-raised btn-block btn-info no-margin-top">
+                            <div class="h1">{{stats.total.nb_greys}}</div>
+                            Unhappy
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12">
+            <a href="{% url 'dashboard_customers'%}">
+                <div class="btn btn-raised btn-block btn-primary border-bottom no-margin-bottom">
+                    <div class="h1">{{stats.total.nb_customers}}</div>
+                    Total Customers
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-8">
+    <div class="preloader-wrapper">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <ul class="nav nav-pills nav-justified">
+        <li id="timeDaily">
+            <a href="javascript:void(0)">
+                <div class="h4">DAILY</div>
+            </a>
+        </li>
+        <li id="timeWeekly">
+            <a href="javascript:void(0)">
+                <div class="h4">WEEKLY</div>
+            </a>
+        </li>
+        <li id="timeMonthly">
+            <a href="javascript:void(0)">
+                <div class="h4">MONTHLY</div>
+            </a>
+        </li>
+        <li id="timeYearly">
+            <a href="javascript:void(0)">
+                <div class="h4">YEARLY</div>
+            </a>
+        </li>
+        <li id="timeDay">
+            <a href="javascript:void(0)">
+                <div class="h4">TODAY</div>
+            </a>
+        </li>
+        <li id="timeWeek">
+            <a href="javascript:void(0)">
+                <div class="h4">WEEK</div>
+            </a>
+        </li>
+        <li class="active" id="timeMonth">
+            <a href="javascript:void(0)">
+                <div class="h4">MONTH</div>
+            </a>
+        </li>
+        <li id="timeYear">
+            <a href="javascript:void(0)">
+                <div class="h4">YEAR</div>
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <div class="col-xs-12">
+        <div class="panel dash-chart-cover" id="dashChartCover">
+            <div class="panel-body">
+                <div class="col-xs-2 text-light">
+                    <small><b>STATISTICS</b></small>
+                </div>
+                <div id="dashChart" style="height:400px;"></div>
+            </div>
+        </div>
+        {% for bentity in bentities %}
+        <div class="panel">
+            <div class="panel-body">
+                <div class="h3"><a href="{% url 'dashboard_pk' bentity.pk %}">{{bentity.name}} <span class="btn btn-sm btn-raised btn-primary pull-right">VIEW PROFILE</span></a></div>
+                {{bentity.mobile}} | {{bentity.email}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %} {% block script %}
+<script>
+    $(function () {
+        $.getJSON("{% url 'dashboard_owner_json' %}", function (data) {
+            loadDashboardOwner(data);
+        }).done(function () {
+            $('.preloader-wrapper').fadeOut()
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% load staticfiles %}
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} | Feedback Analysis</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'b2b/css/style.css' %}?v=0.3.2">
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    {% if pk != 0 and incharge %}
+    <div class="row">
+        <div class="text-center h2">
+            EMULATION MODE
+        </div>
+        <div class="text-center h4">
+            You are viewing this as <strong>{{incharge.user.get_full_name}}</strong> for <strong>{{incharge.b_entity.name}}</strong>
+        </div>
+    </div>
+    {% endif %}
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{%url 'dashboard'%}"><img class="img-responsive" src="{% static 'b2b/images/logo.png'%}" alt=""></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="nav-drop dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">&#xE7FD;</i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{%url 'dashboard'%}">Dashboard</a></li>
+                                <li><a href="{%url 'dashboard_profile'%}">Profile</a></li>
+                                <li><a href="{%url 'dashboard_bentity'%}">Company</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/accounts/logout/">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+
+    <!-- Add your site or application content here -->
+    <div class="wrapper">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="{% static 'b2b/js/material.min.js' %}"></script>
+    <script src="{% static 'b2b/js/ripples.min.js' %}"></script>
+    <script src="{% static 'b2b/js/echarts/echarts.js' %}"></script>
+    <script src="{% static 'b2b/js/newsTicker.min.js' %}"></script>
+    <script src="{% static 'b2b/js/script-dist.js' %}?v=0.3.4"></script>
+    {% block script %}{% endblock %}
+    <!-- Google Analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o)
+                , m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-75898010-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+
+</html>

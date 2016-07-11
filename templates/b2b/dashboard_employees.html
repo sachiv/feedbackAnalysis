@@ -1,0 +1,80 @@
+{% extends 'b2b/base.html' %} {% block title %}Employee Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+
+<div class="container">
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Add Employee</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'dashboard_employees'%}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="first_name">First Name*</label>
+                                <input class="form-control" value="{{form.first_name}}" id="first_name" name="first_name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="last_name">Last Name*</label>
+                                <input class="form-control" value="{{form.last_name}}" id="last_name" name="last_name" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="mobile">Mobile*</label>
+                        <input class="form-control" value="{{form.mobile}}" pattern="^[789]\d{9}$" id="mobile" name="mobile" type="text" maxlength="10" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="pin">Pin*</label>
+                        <div class="input-group">
+                            <input id="pin" name="pin" value="{{form.pin}}" class="form-control" pattern="^\d{4}$" type="text" maxlength="4" required>
+                            <span class="input-group-btn">
+                                <button id="generatePin" type="button" class="btn btn-raised btn-primary">
+                                    <i class="material-icons">lock</i> Generate Pin
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="pk" value="{{form.pk}}">
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="text-center">
+            <div class="h2">Employee List</div>
+        </div>
+        <div class="list-group">
+            {% for employee in employees|dictsortreversed:"score" %}
+            <div class="list-group-item">
+                <div class="row-content">
+                    <div class="least-content">
+                        <a class="btn btn-primary btn-fab btn-fab-mini" href="{% url 'dashboard_employee_edit' pk=employee.employee.pk %}">
+                            <i class="material-icons">&#xE3C9;</i>
+                        </a>
+                        <a class="btn btn-danger btn-fab btn-fab-mini" href="{% url 'dashboard_employee_remove' pk=employee.employee.pk %}">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </a>
+                    </div>
+                    <h4 class="list-group-item-heading"><a href="{%url 'dashboard_employee' employee.employee.pk %}">{{ employee.employee.get_full_name }}</a></h4>
+                    <p class="list-group-item-text">PIN: {{ employee.employee.pin }} | MOBILE: {{employee.employee.mobile}}</p>
+                    <br>
+                    <small><b>FEEDBACKS: {{employee.nb_feedbacks}}</b></small>
+                    <div class="employee-bar" style="width:{{employee.p_feedbacks}}%"></div>
+                    <small><b>SCORE: {{employee.score|floatformat:2}}%</b></small>
+                    <div class="employee-bar2" style="width:{{employee.score|floatformat:2}}%"></div>
+                </div>
+            </div>
+            <div class="list-group-separator"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

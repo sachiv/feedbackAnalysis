@@ -1,0 +1,99 @@
+{% extends 'staff/base.html' %} {% block title %}Market | Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{error}}
+        </div>
+        {% elif success %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{success}}
+        </div>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Add Promo SMS Template</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'staff_dashboard_promosms'%}">
+                    {% csrf_token %}
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="title">Title*</label>
+                        <input class="form-control" id="title" name="title" type="text" maxlength="100" required>
+                    </div>
+                    <div class="togglebutton text-center">
+                        <label>
+                            COMMON
+                            <input name="type" id="promosmsTypeCheckbox" type="checkbox" checked> PERSONAL
+                        </label>
+                    </div>
+                    <select id="b_entity" class="form-control" name="b_entity" required>
+                        <option value="0">Restaurant</option>
+                        {% for b_entity in b_entities %}
+                        <option value="{{b_entity.pk}}">{{b_entity}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-group label-floating">
+                        <label for="content" class="control-label">Content*</label>
+                        <textarea class="form-control" rows="3" id="content" name="content" required></textarea>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active" checked> Active
+                        </label>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">ADD PROMO SMS TEMPLATE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="text-center">
+            <div class="h2">
+                PROMO SMS TEMPLATE LIST
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ACTIVE</th>
+                        <th>TYPE</th>
+                        <th>RESTAURANT</th>
+                        <th>TITLE</th>
+                        <th>CONTENT</th>
+                        <th>ARCHIVED</th>
+                        <th>UPDATED AT</th>
+                        <th>CREATED AT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for promosms in promosms_list %}
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="promoTemplateActive" name="{{promosms.pk}}" {%if promosms.active %} checked {%endif%}>
+                                </label>
+                            </div>
+                        </td>
+                        <th>{{promosms.type}}</th>
+                        <td>{{promosms.b_entity}}</td>
+                        <td>{{promosms.title}}</td>
+                        <td>{{promosms.content|linebreaks}}</td>
+                        <td>{{promosms.archive}}</td>
+                        <td>{{promosms.updated_at}}</td>
+                        <td>{{promosms.created_at}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'b2b/base.html' %} {% block title %}Feedbacks Dashboard{% endblock %} {% block content %} {% load staticfiles %}{% load get_range %}
+<div class="container">
+    <div class="text-center">
+        <div class="h1">Feedbacks</div>
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li>
+                        <a href="?page={{ data.previous_page_number }}">«</a>
+                    </li>
+                {% endif %}
+                {% for i in data.paginator.num_pages|get_range %}
+                    {% if i > 0 %}
+                    <li {% if data.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if data.has_next %}
+                    <li>
+                        <a href="?page={{ data.next_page_number }}">»</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    <div class="panel">
+        <div class="user-details list-group">
+            <div class="list-group-item">
+                <div class="row-action-primary">
+                    <i class="material-icons">&#xE7FD;</i>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><div class="h2">{{incharge.user.get_full_name}}</div></h4>
+
+                    <p class="list-group-item-text">Incharge | {{incharge.b_entity.name}}</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <ul class="cmt-list cmtList list-group">
+            {% for d in data%}
+            <li class="list-group-item">
+                <div class="row-action-primary">
+                    <div class="circle-box {% if d.7 <= 2 %} circle-box-info {%endif%}">
+                        {{d.7|floatformat:1}}
+                    </div>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><a href="{%url 'dashboard_customer' d.0.customer.pk %}">{{d.0.customer.get_full_name}}</a></h4>
+                    <p class="list-group-item-text">
+                        {{d.0.comment}}
+                    </p>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p>AMBIENCE: {{d.1}} | COST: {{d.2}} | FOOD: {{d.3}} | SERVICE: {{d.4}} | {{d.0.b_entity.qd1_text}} : {{d.5}} | {{d.0.b_entity.qd2_text}} : {{d.6}}</p>
+                            <a href="{%url 'dashboard_employee' d.0.employee.pk %}">
+                                <p><i class="material-icons">&#xEB49;</i> {{d.0.employee}}</p>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <small>{{d.0.timestamp}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="text-center">
+        <ul class="pagination">
+            {% if data.has_previous %}
+                <li>
+                    <a href="?page={{ data.previous_page_number }}">«</a>
+                </li>
+            {% endif %}
+            {% for i in data.paginator.num_pages|get_range %}
+                {% if i > 0 %}
+                <li {% if data.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if data.has_next %}
+                <li>
+                    <a href="?page={{ data.next_page_number }}">»</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

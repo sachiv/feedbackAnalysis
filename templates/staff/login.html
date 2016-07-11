@@ -1,0 +1,38 @@
+{% extends 'b2b/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+
+<div class="col-sm-offset-2 col-sm-6 col-md-offset-4 col-md-4">
+    {% if notify %}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{notify}}
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <div class="panel panel-primary text-center">
+        <div class="panel-heading">
+            <h3 class="panel-title"><div class="h1">LOGIN</div></h3>
+        </div>
+        <div class="panel-body text-left">
+            <form action="{% url 'staff_login_page'%}" method="post">
+                {% csrf_token %}
+                <div class="form-group label-floating">
+                    <label class="control-label" for="username">Username</label>
+                    <input class="form-control" id="username" type="text" name="username">
+                </div>
+                <div class="form-group label-floating">
+                    <label class="control-label" for="password">Password</label>
+                    <input class="form-control" id="password" type="password" name="password">
+                </div>
+                <br>
+                <hr>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-lg btn-raised btn-primary" value="LOGIN" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'staff/base.html' %} {% block title %}B2B Customers | Dashboard{% endblock %} {% block content %} {% load staticfiles %} {% load get_range %}
+<div class="col-xs-12">
+   <div class="text-center">
+       <h1>B2B Customer List</h1>
+   </div>
+    <div class="table-responsive">
+        <table class="table table-hover text-center gg-table">
+            <thead>
+               <tr>
+                   <td colspan="8">
+                       COMPANY
+                   </td>
+                   <td colspan="4">
+                       INCHARGE
+                   </td>
+                   <td colspan="4">
+                       BALANCE
+                   </td>
+               </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>Fax</th>
+                    <th>QD1 Text</th>
+                    <th>QD2 Text</th>
+                    <th>Registration On</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>Balance</th>
+                    <th>Status</th>
+                    <th>Promo Balance</th>
+                    <th>Promo Validity</th>
+                    <th>Thank You Validity</th>
+                    <th>NFA Validity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bentity in bentity_list %}
+                <tr>
+                    <td>{{bentity.bentity.name|title}}</td>
+                    <td>{{bentity.bentity.email}}</td>
+                    <td>{{bentity.bentity.mobile}}</td>
+                    <td>{{bentity.bentity.address}}</td>
+                    <td>{{bentity.bentity.fax}}</td>
+                    <td>{{bentity.bentity.qd1_text}}</td>
+                    <td>{{bentity.bentity.qd2_text}}</td>
+                    <td>{{bentity.bentity.created_at}}</td>
+                    <td>{{bentity.incharge.user.get_full_name|title}}</td>
+                    <td>{{bentity.incharge.user.email}}</td>
+                    <td>{{bentity.user_profile.mobile}}</td>
+                    <td>{{bentity.user_profile.address}}</td>
+                    <td>{{bentity.balance_account.balance}}</td>
+                    <td>{{bentity.balance_account.status}}</td>
+                    <td>{{bentity.asset_account.sms_promo}}</td>
+                    <td>{{bentity.asset_account.sms_promo_validity}}</td>
+                    <td>{{bentity.asset_account.sms_thankyou_validity}}</td>
+                    <td>{{bentity.asset_account.sms_nfa_validity}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if customers %}
+    <div class="text-center">
+        <ul class="pagination">
+            {% if customers.has_previous %}
+            <li>
+                <a href="?page={{ customers.previous_page_number }}">«</a>
+            </li>
+            {% endif %} {% for i in customers.paginator.num_pages|get_range %} {% if i > 0 %}
+            <li {% if customers.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %} {% endfor %} {% if customers.has_next %}
+            <li>
+                <a href="?page={{ customers.next_page_number }}">»</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'b2b/base.html' %} {% block title %}Customer Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+
+<div class="container">
+    <p class="col-sm-6">
+        <div class="text-center">
+            <div class="h2">Customer</div>
+        </div>
+        <div class="h3 text-center">{{ data.0.0.customer.get_full_name }}</div>
+        <ul class="list-unstyled list-inline text-center">
+            <li>
+                MOBILE: {{ data.0.0.customer.mobile }}
+            </li>
+            <li>
+                EMAIL: {{data.0.0.customer.email}}
+            </li>
+        </ul>
+        <hr />
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h4">FEEDBACKS</div>
+            </div>
+            <div class="panel-body">
+                <ul class="cmt-list cmtList list-group">
+                    {% for d in data%}
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="row-action-primary">
+                                <div class="circle-box {% if d.7 <= 2 %} circle-box-info {%endif%}">
+                                    {{d.7|floatformat:1}}
+                                </div>
+                            </div>
+                            <div class="row-content">
+                                <p class="list-group-item-text">
+                                    {{d.0.comment}}
+                                </p>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p>AMBIENCE: {{d.1}} | COST: {{d.2}} | FOOD: {{d.3}} | SERVICE: {{d.4}} | {{d.0.b_entity.qd1_text}} : {{d.5}} | {{d.0.b_entity.qd2_text}} : {{d.6}}</p>
+                                        <a href="{%url 'dashboard_employee' d.0.employee.pk %}">
+                                            <p><i class="material-icons">&#xEB49;</i> {{d.0.employee}}</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <small>{{d.0.timestamp}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="list-group-separator"></div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'b2b/base.html' %} {% block title %}Customer Dashboard{% endblock %} {% block content %} {% load staticfiles %}{% load get_range %}
+
+<div class="container">
+    <p class="col-sm-6">
+        <div class="text-center">
+            <div class="h2">Employee</div>
+        </div>
+        <div class="h3 text-center">{{ employee.get_full_name }}</div>
+        <div class="h4 text-center">
+            <div class="label {%if employee.active %} label-primary {% else %} label-info {% endif %}">
+                {%if employee.active %} ACTIVE {% else %} INACTIVE {% endif %}
+            </div>
+        </div>
+        <ul class="list-unstyled list-inline text-center">
+            <li>
+                MOBILE: {{ employee.mobile }}
+            </li>
+            <li>
+                PIN: {{employee.pin}}
+            </li>
+        </ul>
+        <hr />
+        <ul class="nav nav-pills nav-justified">
+            <li id="timeDaily">
+                <a href="javascript:void(0)">
+                    <div class="h4">DAILY</div>
+                </a>
+            </li>
+            <li id="timeWeekly">
+                <a href="javascript:void(0)">
+                    <div class="h4">WEEKLY</div>
+                </a>
+            </li>
+            <li id="timeMonthly">
+                <a href="javascript:void(0)">
+                    <div class="h4">MONTHLY</div>
+                </a>
+            </li>
+            <li id="timeYearly">
+                <a href="javascript:void(0)">
+                    <div class="h4">YEARLY</div>
+                </a>
+            </li>
+            <li id="timeDay">
+                <a href="javascript:void(0)">
+                    <div class="h4">TODAY</div>
+                </a>
+            </li>
+            <li id="timeWeek">
+                <a href="javascript:void(0)">
+                    <div class="h4">WEEK</div>
+                </a>
+            </li>
+            <li class="active" id="timeMonth">
+                <a href="javascript:void(0)">
+                    <div class="h4">MONTH</div>
+                </a>
+            </li>
+            <li id="timeYear">
+                <a href="javascript:void(0)">
+                    <div class="h4">YEAR</div>
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <div class="panel dash-chart-cover" id="dashChartCover">
+            <div class="panel-body">
+                <div id="dashChart" style="height:400px;">
+                    <div class="preloader-wrapper">
+                        <div class="spinner">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li>
+                        <a href="?page={{ data.previous_page_number }}">«</a>
+                    </li>
+                {% endif %}
+                {% for i in data.paginator.num_pages|get_range %}
+                    {% if i > 0 %}
+                    <li {% if data.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if data.has_next %}
+                    <li>
+                        <a href="?page={{ data.next_page_number }}">»</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h4">FEEDBACKS</div>
+            </div>
+            <div class="panel-body">
+                <ul class="cmt-list cmtList list-group">
+                    {% for d in data%}
+                    <li class="list-group-item">
+                        <div class="row-action-primary">
+                            <div class="circle-box {% if d.7 <= 2 %} circle-box-info {%endif%}">
+                                {{d.7|floatformat:1}}
+                            </div>
+                        </div>
+                        <div class="row-content">
+                            <h4 class="list-group-item-heading"><a href="{%url 'dashboard_customer' d.0.customer.pk %}">{{d.0.customer.get_full_name}}</a></h4>
+                            <p class="list-group-item-text">
+                                {{d.0.comment}}
+                            </p>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p>AMBIENCE: {{d.1}} | COST: {{d.2}} | FOOD: {{d.3}} | SERVICE: {{d.4}} | {{d.0.b_entity.qd1_text}} : {{d.5}} | {{d.0.b_entity.qd2_text}} : {{d.6}}</p>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <small>{{d.0.timestamp}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="panel-heading text-center">
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li>
+                        <a href="?page={{ data.previous_page_number }}">«</a>
+                    </li>
+                {% endif %}
+                {% for i in data.paginator.num_pages|get_range %}
+                    {% if i > 0 %}
+                    <li {% if data.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if data.has_next %}
+                    <li>
+                        <a href="?page={{ data.next_page_number }}">»</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+</div>
+
+{% endblock %}{% block script %}
+<script>
+    $(function () {
+        $.getJSON("{% url 'dashboard_employee_json' pk=employee.pk %}", function (data) {
+            $('.preloader-wrapper').fadeIn()
+            loadEmployeeChart(data);
+        }).done(function () {
+            $('.preloader-wrapper').fadeOut()
+        })
+    })
+</script>
+{% endblock %}

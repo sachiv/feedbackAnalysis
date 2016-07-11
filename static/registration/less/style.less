@@ -1,0 +1,96 @@
+@import url('components.less');
+
+//DASHBOARD ------------------------
+
+//SIDEBAR ---------------------
+
+.sidebar{
+    padding-bottom:0;
+}
+
+.user-details{
+    font-size:1.2em;
+}
+
+.stat-bars{
+    margin: 1em 0;
+    text-align:center;
+    color: white;
+    .stat-bar{
+        padding-top: 1em;
+    }
+    .left{
+        background-color: @brand-primary;
+    }
+    .center{
+        background-color: @grey;
+    }
+    .right{
+        background-color: @brand-success;
+    }
+}
+
+.cmt-list{
+    text-align:left;
+    padding:0;
+    list-style:none;
+    li{
+        display:block;
+        padding:1em 0;
+    }
+    .round{
+        height:50px;
+        width:50px;
+        background-size:cover;
+        background-position:center center;
+        border-radius:50%;
+        display:inline-block;
+        vertical-align:middle;
+        margin-right: 1em;
+    }
+    .cmt{
+        display: inline-block;
+        vertical-align:middle;
+        .msg{
+            display:block;
+            width: 15vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    .dot{
+        height:10px;
+        width:10px;
+        border-radius:50%;
+        background-color:@brand-primary;
+        position: absolute;
+        top:50%;
+        right:1em;
+        transform:translateY(-50%);
+    }
+    .dot-danger{
+        background-color:@brand-danger;
+    }
+}
+
+.more-sect{
+    text-align:center;
+    text-tranform:uppercase;
+    width:100%;
+    display:block;
+    background-color:@grey;
+    color:white;
+    border-bottom-left-radius:2px;
+    border-bottom-right-radius:2px;
+    padding-top:0.7em;
+    padding-bottom:0.7em;
+}
+
+//SIDEBAR ---------------------
+
+//DASH-CHART ------------------
+#dashChart{
+    margin:0 1em;
+}
+//DASH-CHART ------------------

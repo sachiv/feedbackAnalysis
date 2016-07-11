@@ -1,0 +1,35 @@
+{% extends 'b2b/base.html' %} {% block title %}Profile Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                <div class="h1">{{user.user.get_full_name}}</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="h4">USERNAME: {{user.user.username}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="h4">MOBILE: {{profile.mobile}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="h4">EMAIL: {{user.user.email}}</div>
+                </div>
+                <div class="col-xs-12">
+                    <hr>
+                    <div class="h4">ADDRESS</div>
+                    <div class="h5">{{profile.address.street}}</div>
+                    <div class="h5">{{profile.address.city}}</div>
+                    <div class="h5">{{profile.address.state}}, {{profile.address.country}} - {{profile.address.zip_code}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn-abso">
+    <a href="{% url 'dashboard_profile_edit' %}" class="btn btn-primary btn-fab"><i class="material-icons">&#xE3C9;</i></a>
+</div>
+
+{% endblock %}

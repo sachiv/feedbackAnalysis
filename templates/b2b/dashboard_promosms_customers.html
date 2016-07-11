@@ -1,0 +1,81 @@
+{% extends 'b2b/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="col-sm-2">
+    <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+        <li id="allFilter" class="active"><a href="javascript:void(0)">ALL</a></li>
+        <hr>
+        <li id="greenFilter"><a href="javascript:void(0)">HAPPY CUSTOMERS</a></li>
+        <li id="greyFilter"><a href="javascript:void(0)">UNHAPPY CUSTOMERS</a></li>
+        <hr>
+        <li id="commentFilter"><a href="javascript:void(0)">COMMENTS</a></li>
+        <li id="nocommentFilter"><a href="javascript:void(0)">NO COMMENTS</a></li>
+        <hr>
+        <li id="returningFilter"><a href="javascript:void(0)">RETURNING</a></li>
+        <li id="nonreturningFilter"><a href="javascript:void(0)">NON - RETURNING</a></li>
+    </ul>
+</div>
+<div class="col-sm-10">
+    <div class="text-center">
+        <div class="h1">{{incharge.b_entity.name}} Customers</div>
+    </div>
+    <div class="text-center">
+        <form method="POST" action="{%url 'dashboard_promosms_customers'%}">
+            {% csrf_token %}
+            <div class="text-center">
+                <button name="submit" value="send_sms" class="btn btn-lg btn-raised btn-primary">SEND SMS</button>
+            </div>
+            <input type="hidden" name="template_id" value="{{template_id}}">
+            <div class="table-responsive">
+                <table class="table table-hover text-center gg-table">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-center">
+                                <div class="h4">Customer</div>
+                            </th>
+                            <th colspan="2" class="text-center">
+                                <div class="h4">Latest Feedback</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="selectAll">
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">No. of Feedbacks</th>
+                            <th class="text-center">Comment</th>
+                            <th class="text-center">Rating</th>
+                            <th class="text-center">Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers%}
+                        <tr class="{% if customer.feedback.get_overall_rating < 2 %}grey{% else %}green{%endif%} {% if customer.feedback.comment != '' %}comment{%else%}nocomment{%endif%} {% if customer.returning == 1 %}returning{%else%}nonreturning{% endif %}">
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="customer" value="{{customer.customer.pk}}">
+                                    </label>
+                                </div>
+                            </td>
+                            <td><a href="{%url 'dashboard_customer' customer.customer.pk %}">{{customer.customer.get_full_name|title}}</a></td>
+                            <td>{{customer.customer.email}}</td>
+                            <td>{{customer.nb_feedbacks}}</td>
+                            <td>{{customer.feedback.comment}}</td>
+                            <td>
+                                <div class="label {% if customer.feedback.get_overall_rating < 2 %}label-info{% else %}label-primary{%endif%}">{{customer.feedback.get_overall_rating|floatformat:1}}</div>
+                            </td>
+                            <td>{{customer.feedback.timestamp}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

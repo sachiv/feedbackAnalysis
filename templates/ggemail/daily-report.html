@@ -1,0 +1,783 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: Helvetica;">
+
+<head style="font-family: Helvetica;">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" style="font-family: Helvetica;">
+    <meta name="viewport" content="width=device-width" style="font-family: Helvetica;">
+    <title style="font-family: Helvetica;">Daily Report - Feedback Analysis</title>
+
+    <style type="text/css" style="font-family: Helvetica;">
+        /*////// RESET STYLES //////*/
+
+        * {
+            font-family: Helvetica;
+        }
+
+        body,
+        #bodyTable,
+        #bodyCell {
+            height: 100% !important;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        img,
+        a img {
+            border: 0;
+            outline: none;
+            text-decoration: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+        /*////// CLIENT-SPECIFIC STYLES //////*/
+
+        .text-right {
+            text-align: right;
+        }
+
+        .ReadMsgBody {
+            width: 100%;
+        }
+
+        .ExternalClass {
+            width: 100%;
+        }
+        /* Force Hotmail/Outlook.com to display emails at full width. */
+
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+        /* Force Hotmail/Outlook.com to display line heights normally. */
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        /* Remove spacing between tables in Outlook 2007 and up. */
+
+        #outlook a {
+            padding: 0;
+        }
+        /* Force Outlook 2007 and up to provide a "view in browser" message. */
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+        /* Force IE to smoothly render resized images. */
+
+        body,
+        table,
+        td,
+        p,
+        a,
+        li,
+        blockquote {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        /* Prevent Windows- and Webkit-based mobile platforms from changing declared text sizes. */
+        /*////// FRAMEWORK STYLES //////*/
+
+        .flexibleContainerCell {
+            padding-top: 20px;
+            padding-Right: 20px;
+            padding-Left: 20px;
+        }
+
+        .flexibleContainerCellExtra {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-Right: 20px;
+            padding-Left: 20px;
+        }
+
+        .flexibleContainerCellSlim {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-Right: 30px;
+            padding-Left: 30px;
+        }
+
+        .flexibleContainerCellSlimmer {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-Right: 80px;
+            padding-Left: 80px;
+        }
+
+        .flexibleContainerCellNoTop {
+            padding-top: 0px;
+            padding-Right: 20px;
+            padding-Left: 20px;
+        }
+
+        .flexibleImage {
+            height: auto;
+        }
+
+        .bottomShim {
+            padding-bottom: 20px;
+        }
+
+        .imageContent,
+        .imageContentLast {
+            padding-bottom: 20px;
+        }
+
+        .nestedContainerCell {
+            padding-top: 20px;
+            padding-Right: 20px;
+            padding-Left: 20px;
+        }
+        /*////// GENERAL STYLES //////*/
+
+        body,
+        #bodyTable {
+            background-color: #FFFFFF;
+        }
+
+        #bodyCell {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        #emailBody {
+            background-color: #F5F5F5;
+            border-collapse: separate;
+            border-radius: 4px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #FFFFFF;
+            font-family: Helvetica;
+            font-size: 20px;
+            line-height: 125%;
+            text-align: Left;
+        }
+
+        .textContent,
+        .textContentLast {
+            color: #FFFFFF;
+            font-family: Helvetica;
+            font-size: 16px;
+            font-weight: 100;
+            line-height: 125%;
+            text-align: Left;
+            padding-bottom: 20px;
+        }
+
+        .textContentRight {
+            color: #FFFFFF;
+            font-family: Helvetica;
+            font-size: 16px;
+            font-weight: 100;
+            line-height: 125%;
+            text-align: Right;
+            padding-bottom: 20px;
+        }
+
+        .textContent a,
+        .textContentLast a {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        .smallText {
+            color: #FFFFFF;
+            font-family: Helvetica;
+            font-size: 14px;
+        }
+
+        .smallText a {
+            color: #FFFFFF;
+            font-family: Helvetica;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .verticalStrip {
+            background-color: #FFFFFF;
+            padding-top: 20px;
+        }
+
+        .nestedContainer {
+            color: #FFFFFF;
+            background-color: #3F51B5;
+            border-radius: 20px;
+        }
+
+        .nestedContainerGrey {
+            color: #FFFFFF;
+            background-color: #434553;
+            border-radius: 20px;
+        }
+
+        .emailButton {
+            background-color: #434553;
+            border-collapse: separate;
+            border-radius: 4px;
+        }
+
+        .buttonContent {
+            color: #FFFFFF;
+            font-family: Helvetica;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 100%;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .buttonContent a {
+            color: #FFFFFF;
+            display: block;
+            text-decoration: none;
+        }
+
+        .emailCalendar {
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+        }
+
+        .emailCalendarMonth {
+            background-color: #2C9AB7;
+            color: #FFFFFF;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .emailCalendarDay {
+            color: #2C9AB7;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 60px;
+            font-weight: bold;
+            line-height: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        /*////// MOBILE STYLES //////*/
+
+        @media only screen and (max-width: 480px) {
+            /*////// CLIENT-SPECIFIC STYLES //////*/
+            body {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+            /* Force iOS Mail to render the email at full width. */
+            /*////// FRAMEWORK STYLES //////*/
+            /*
+					CSS selectors are written in attribute
+					selector format to prevent Yahoo Mail
+					from rendering media query styles on
+					desktop.
+				*/
+            table[id="emailBody"],
+            table[class="flexibleContainer"] {
+                width: 100% !important;
+            }
+            /*
+					The following style rule makes any
+					image classed with 'flexibleImage'
+					fluid when the query activates.
+					Make sure you add an inline max-width
+					to those images to prevent them
+					from blowing out.
+				*/
+            img[class="flexibleImage"] {
+                height: auto !important;
+                width: 100% !important;
+            }
+            /*
+					Make buttons in the email span the
+					full width of their container, allowing
+					for left- or right-handed ease of use.
+				*/
+            table[class="emailButton"] {
+                width: 100% !important;
+            }
+            td[class="buttonContent"] {
+                padding: 0 !important;
+            }
+            td[class="buttonContent"] a {
+                padding: 15px !important;
+            }
+            td[class="textContentLast"],
+            td[class="imageContentLast"] {
+                padding-top: 20px !important;
+            }
+            /*////// GENERAL STYLES //////*/
+            td[id="bodyCell"] {
+                padding-top: 10px !important;
+                padding-Right: 10px !important;
+                padding-Left: 10px !important;
+            }
+        }
+
+        .bottom-text {
+            color: #AAA;
+            font-family: Helvetica;
+            font-size: 12px;
+            text-align: center;
+            line-height: 125%;
+            padding: 5px;
+        }
+
+        .margin-bottom-20 {
+            margin-bottom: 20px;
+        }
+
+        .report-table {
+            margin-bottom: 20px;
+        }
+
+        .report-table tr.thead {
+            background-color: grey;
+            border: solid 1px grey;
+        }
+
+        .report-table tr.thead th {
+            padding: 10px 5px;
+        }
+
+        .report-table tr.tbody {
+            /*background-color: grey;*/
+        }
+
+        .report-table tr.tbody td {
+            padding: 10px 5px;
+            border: solid 1px grey;
+        }
+
+        tr.sub-heading th {
+            padding-top: 20px;
+        }
+    </style>
+    <!--
+        	Outlook Conditional CSS
+
+            These two style blocks target Outlook 2007 & 2010 specifically, forcing
+            columns into a single vertical stack as on mobile clients. This is
+            primarily done to avoid the 'page break bug' and is optional.
+
+            More information here:
+			http://templates.mailchimp.com/development/css/outlook-conditional-css
+        -->
+    <!--[if mso 12]>
+            <style type="text/css">
+            	.flexibleContainer{display:block !important; width:100% !important;}
+            </style>
+        <![endif]-->
+    <!--[if mso 14]>
+            <style type="text/css">
+            	.flexibleContainer{display:block !important; width:100% !important;}
+            </style>
+        <![endif]-->
+</head>
+
+<body style="font-family: Helvetica;margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;height: 100% !important;width: 100% !important;">
+    <center style="font-family: Helvetica;">
+        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #FFFFFF;height: 100% !important;width: 100% !important;">
+            <tr style="font-family: Helvetica;">
+                <td align="center" valign="top" id="bodyCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;padding-top: 10px !important;padding-bottom: 40px;padding-right: 10px !important;padding-left: 10px !important;height: 100% !important;width: 100% !important;">
+                    <!-- EMAIL CONTAINER // -->
+                    <!--
+                        	The table "emailBody" is the email's container.
+                            Its width can be set to 100% for a color band
+                            that spans the width of the page.
+                        -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="font-family: Helvetica;border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #F5F5F5;border-radius: 4px;width: 100% !important;">
+                        <tr style="font-family: Helvetica;">
+                            <td align="center" valign="top" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <!-- CENTERING TABLE // -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <tr style="font-family: Helvetica;">
+                                        <td align="center" valign="top" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <!-- FLEXIBLE CONTAINER // -->
+                                            <table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;width: 100% !important;">
+                                                <tr style="font-family: Helvetica;">
+                                                    <td align="center" valign="top" width="600" class="flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-right: 20px;padding-left: 20px;">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                            <tr style="font-family: Helvetica;">
+                                                                <td align="center" valign="top" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                    <!-- FLEXIBLE CONTAINER // -->
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;width: 100% !important;">
+                                                                        <tr style="font-family: Helvetica;">
+                                                                            <td align="center" valign="top" width="600" class="flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-right: 20px;padding-left: 20px;">
+                                                                                <table border="0" cellpadding="0" cellspacing="0" width="260" class="verticalStrip" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;padding-top: 20px;">
+                                                                                    <tr style="font-family: Helvetica;">
+                                                                                        <td align="center" valign="middle" class="flexibleContainerCellExtra" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 30px;padding-bottom: 30px;padding-right: 20px;padding-left: 20px;">
+                                                                                            <img src="#" width="300" class="flexibleImage" style="max-width: 300px;font-family: Helvetica;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;height: auto !important;width: 100% !important;">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr style="font-family: Helvetica;">
+                                                    <td align="center" valign="top" width="600" class="flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-right: 20px;padding-left: 20px;">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="nestedContainer" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;background-color: #3F51B5;border-radius: 20px;">
+                                                            <tr style="font-family: Helvetica;">
+                                                                <td align="center" valign="top" class="nestedContainerCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 20px;padding-right: 20px;padding-left: 20px;">
+                                                                    <!-- CONTENT TABLE // -->
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                        <tr style="font-family: Helvetica;">
+                                                                            <td align="center" class="textContent flexibleContainerCellSlimmer flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-bottom: 20px;padding-right: 20px;padding-left: 20px;color: #FFFFFF;font-size: 16px;font-weight: 100;line-height: 125%;text-align: Left;">
+                                                                                <h1 style="font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;text-align: Left;">DAILY REPORT</h1>
+                                                                            </td>
+                                                                            <td align="right" class="textContentRight flexibleContainerCellSlimmer flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-bottom: 20px;padding-right: 20px;padding-left: 20px;color: #FFFFFF;font-size: 16px;font-weight: 100;line-height: 125%;text-align: Right;">
+                                                                                {{date}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr style="font-family: Helvetica;">
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="nestedContainerGrey margin-bottom-20" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;background-color: #434553;border-radius: 20px;margin-bottom: 20px;">
+                                                                                <tr style="font-family: Helvetica;">
+                                                                                    <td align="center" valign="top" class="nestedContainerCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 20px;padding-right: 20px;padding-left: 20px;">
+                                                                                        <!-- CONTENT TABLE // -->
+                                                                                        <table class="report-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin-bottom: 20px;">
+                                                                                            <tr class="thead" style="font-family: Helvetica;background-color: grey;border: solid 1px grey;">
+                                                                                                <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                    <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">COUNT</h6>
+                                                                                                </th>
+                                                                                                <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                    <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">YESTERDAY</h6>
+                                                                                                </th>
+                                                                                                <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                    <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">DAILY AVERAGE</h6>
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Happy Customers</td>
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{stats_daily_happy}}</td>
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{stats_daily_happy_avg}}</td>
+                                                                                            </tr>
+                                                                                            <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Unhappy Customers</td>
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{stats_daily_unhappy}}</td>
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{stats_daily_unhappy_avg}}</td>
+                                                                                            </tr>
+                                                                                            <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Total Feedbacks</td>
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{stats_daily_total}}</td>
+                                                                                                <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{stats_daily_total_avg}}</td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                        <!-- // CONTENT TABLE -->
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr style="font-family: Helvetica;">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="nestedContainerGrey margin-bottom-20" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;background-color: #434553;border-radius: 20px;margin-bottom: 20px;">
+                                                                                        <tr align="center" class="sub-heading" style="font-family: Helvetica;">
+                                                                                            <th align="center" style="font-family: Helvetica;padding-top: 20px;">
+                                                                                                <h5 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Performance</h5>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        <tr style="font-family: Helvetica;">
+                                                                                            <td align="center" valign="top" class="nestedContainerCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 20px;padding-right: 20px;padding-left: 20px;">
+                                                                                                <!-- CONTENT TABLE // -->
+                                                                                                <table class="report-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin-bottom: 20px;">
+                                                                                                    <tr class="thead" style="font-family: Helvetica;background-color: grey;border: solid 1px grey;">
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">PRAMETER</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">YESTERDAY</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">OVERALL</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">CHANGE</h6>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Overall</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">overall</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">overall_avg</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">overall_change</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Ambience</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs1}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs1_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs1_change}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Value for Money</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs2}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs2_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs2_change}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Food</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs3}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs3_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs3_change}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Service</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs4}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs4_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qs4_change}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Custom 1</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qd1}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qd1_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qd1_change}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Custom 2</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qd2}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qd2_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{qd2_change}}</td>
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                                <!-- // CONTENT TABLE -->
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="nestedContainerGrey margin-bottom-20" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;background-color: #434553;border-radius: 20px;margin-bottom: 20px;">
+                                                                                        <tr align="center" class="sub-heading" style="font-family: Helvetica;">
+                                                                                            <th align="center" style="font-family: Helvetica;padding-top: 20px;">
+                                                                                                <h5 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Weekly Count of Feedbacks (w.c.f.)</h5>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        <tr style="font-family: Helvetica;">
+                                                                                            <td align="center" valign="top" class="nestedContainerCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 20px;padding-right: 20px;padding-left: 20px;">
+                                                                                                <!-- CONTENT TABLE // -->
+                                                                                                <table class="report-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin-bottom: 20px;">
+                                                                                                    <tr class="thead" style="font-family: Helvetica;background-color: grey;border: solid 1px grey;">
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Week</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Mon</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Tue</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Wed</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Thu</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Fri</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Sat</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Sun</h6>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Current</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_mon}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_tue}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_wed}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_thu}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_fri}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_sat}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_sun}}</td>
+                                                                                                    </tr>
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">Previous</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_mon_p}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_tue_p}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_wed_p}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_thu_p}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_fri_p}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_sat_p}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{fb_sun_p}}</td>
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                                <!-- // CONTENT TABLE -->
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="nestedContainerGrey margin-bottom-20" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;background-color: #434553;border-radius: 20px;margin-bottom: 20px;">
+                                                                                        <tr align="center" class="sub-heading" style="font-family: Helvetica;">
+                                                                                            <th align="center" style="font-family: Helvetica;padding-top: 20px;">
+                                                                                                <h5 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Performance of Waiter</h5>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        <tr style="font-family: Helvetica;">
+                                                                                            <td align="center" valign="top" class="nestedContainerCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 20px;padding-right: 20px;padding-left: 20px;">
+                                                                                                <!-- CONTENT TABLE // -->
+                                                                                                <table class="report-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin-bottom: 20px;">
+                                                                                                    <tr class="thead" style="font-family: Helvetica;background-color: grey;border: solid 1px grey;">
+                                                                                                        <th align="center" rowspan="2" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Name</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" colspan="2" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Yesterday</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" colspan="2" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Overall(June)</h6>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                    <tr class="thead" style="font-family: Helvetica;background-color: grey;border: solid 1px grey;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Count</h6>
+                                                                                                        </td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Rating</h6>
+                                                                                                        </td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Count</h6>
+                                                                                                        </td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Rating</h6>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    {% for employee in employee %}
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{employee.get_full_name}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{employee.count}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{employee.score}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{employee.count_avg}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{employee.score_avg}}</td>
+                                                                                                    </tr>
+                                                                                                    {% endfor %}
+                                                                                                </table>
+                                                                                                <!-- // CONTENT TABLE -->
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="nestedContainerGrey margin-bottom-20" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;background-color: #434553;border-radius: 20px;margin-bottom: 20px;">
+                                                                                        <tr align="center" class="sub-heading" style="font-family: Helvetica;">
+                                                                                            <th align="center" style="font-family: Helvetica;padding-top: 20px;">
+                                                                                                <h5 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Comments</h5>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        <tr style="font-family: Helvetica;">
+                                                                                            <td align="center" valign="top" class="nestedContainerCell" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 20px;padding-right: 20px;padding-left: 20px;">
+                                                                                                <!-- CONTENT TABLE // -->
+                                                                                                <table class="report-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin-bottom: 20px;">
+                                                                                                    <tr class="thead" style="font-family: Helvetica;background-color: grey;border: solid 1px grey;">
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Customer</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Employee</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Overall Rating</h6>
+                                                                                                        </th>
+                                                                                                        <th align="center" style="font-family: Helvetica;padding: 10px 5px;">
+                                                                                                            <h6 style="text-align: center;font-family: Helvetica;margin: 0;padding: 0;color: #FFFFFF;font-size: 20px;line-height: 125%;">Comment</h6>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                    {% for feedback in feedbacks %}
+                                                                                                    <tr class="tbody" style="font-family: Helvetica;">
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{feedback.customer}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{feedback.employee}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{feedback.overall_rating}}</td>
+                                                                                                        <td align="center" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 10px 5px;border: solid 1px grey;">{{feedback.comment}}</td>
+                                                                                                    </tr>
+                                                                                                    {% endfor %}
+                                                                                                </table>
+                                                                                                <!-- // CONTENT TABLE -->
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <!-- // CONTENT TABLE -->
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr style="font-family: Helvetica;">
+                                                    <td align="center" valign="top" width="600" class="flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-right: 20px;padding-left: 20px;">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                            <tr style="font-family: Helvetica;">
+                                                                <td align="center" valign="top" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                                    <!-- FLEXIBLE CONTAINER // -->
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;width: 100% !important;">
+                                                                        <tr style="font-family: Helvetica;">
+                                                                            <td align="center" valign="top" width="600" class="flexibleContainerCellNoTop" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-top: 0px;padding-right: 20px;padding-left: 20px;">
+                                                                                <table border="0" cellpadding="0" cellspacing="0" width="260" class="verticalStrip" style="font-family: Helvetica;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;padding-top: 20px;">
+                                                                                    <tr style="font-family: Helvetica;">
+                                                                                        <td align="center" valign="middle" class="bottom-text" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #AAA;font-size: 12px;text-align: center;line-height: 125%;padding: 5px;">
+                                                                                            This email was sent to {{email_to}}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="font-family: Helvetica;">
+                                                                                        <td align="center" valign="middle" class="bottom-text" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #AAA;font-size: 12px;text-align: center;line-height: 125%;padding: 5px;">
+                                                                                            Email: blablabla@gmail.com
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="font-family: Helvetica;">
+                                                                                        <td align="center" valign="middle" class="bottom-text" style="font-family: Helvetica;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #AAA;font-size: 12px;text-align: center;line-height: 125%;padding: 5px;">
+                                                                                            <div class="h6" style="font-family: Helvetica;">Address:</div>
+                                                                                            Home Sweet Home
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- // EMAIL CONTAINER -->
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+
+</html>

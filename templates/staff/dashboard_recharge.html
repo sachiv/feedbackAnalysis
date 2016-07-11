@@ -1,0 +1,74 @@
+{% extends 'staff/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{error}}
+        </div>
+        {% elif success %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{success}}
+        </div>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Recharge</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'staff_dashboard_recharge'%}">
+                    {% csrf_token %}
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="amount">Amount*</label>
+                        <input class="form-control" id="amount" name="amount" type="number" maxlength="10" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="receipt_nb">Reciept No.*</label>
+                        <input class="form-control" id="receipt_nb" name="receipt_nb" type="text" maxlength="20" required>
+                    </div>
+                    <select id="b_entity" class="form-control" name="b_entity" required>
+                        <option value="0">Restaurant</option>
+                        {% for balance_account_holder in balance_account_holders %}
+                        <option value="{{balance_account_holder.b_entity.pk}}">{{balance_account_holder.b_entity}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">RECHARGE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="text-center">
+            <div class="h2">
+                BALANCE LIST
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>RESTAURANT</th>
+                        <th>BALANCE</th>
+                        <th>STATUS</th>
+                        <th>CREDIT LIMIT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for balance_account_holder in balance_account_holders %}
+                    <tr>
+                        <td>{{balance_account_holder.b_entity}}</td>
+                        <td>{{balance_account_holder.balance_account.balance}}</td>
+                        <td>{{balance_account_holder.balance_account.status}}</td>
+                        <td>{{balance_account_holder.balance_account.credit_limit}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

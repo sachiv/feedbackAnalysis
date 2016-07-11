@@ -1,0 +1,58 @@
+{% extends 'b2b/base.html' %} {% block title %}Registration{% endblock %} {% block content %} {% load staticfiles %}
+
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Registration</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'dashboard_register'%}">
+                    {% csrf_token %}
+                    <div class="h3 text-center">PERSONAL DETAILS</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="first_name">First Name*</label>
+                                <input class="form-control" id="first_name" name="first_name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="last_name">Last Name*</label>
+                                <input class="form-control" id="last_name" name="last_name" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="mobile">Mobile*</label>
+                        <input class="form-control" pattern="^[789]\d{9}$" id="mobile" name="mobile" type="text" maxlength="10" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="email">Email*</label>
+                        <input class="form-control" id="email" name="email" type="email" required>
+                    </div>
+                    <hr>
+                    <div class="h3 text-center">COMPANY DETAILS</div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="c_name">Comapany Name*</label>
+                        <input class="form-control" id="c_name" name="c_name" type="text" maxlength="100" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="c_mobile">Company Mobile*</label>
+                        <input class="form-control" pattern="^[789]\d{9}$" id="c_mobile" name="c_mobile" type="text" maxlength="10" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="c_email">Company Email*</label>
+                        <input class="form-control" id="c_email" name="c_email" type="email" maxlength="70" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">REGISTER</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

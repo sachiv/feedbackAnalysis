@@ -1,0 +1,59 @@
+{% extends 'staff/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{error}}
+        </div>
+        {% elif success %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{success}}
+        </div>
+        {% endif %}
+    </div>
+    {% if not empty %}
+    <div class="col-xs-12 col-md-offset-3 col-md-6">
+        <div class="text-center">
+            <div class="h2">
+                INACTIVE USERS LIST
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>USERNAME</th>
+                        <th>ACTIVATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{user.username}}</td>
+                        <td>
+                            <form method="POST" action="{%url 'staff_dashboard_account_activation'%}">
+                                {% csrf_token %}
+                                <button type="submit" name="submit" value="{{user.username}}" class="save btn btn-sm btn-primary btn-raised">ACTIVATE</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center">
+        <div class="h1 ic-lg">
+            <i class="material-icons">&#xE420;</i>
+        </div>
+        <div class="h2">
+            {{empty}}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

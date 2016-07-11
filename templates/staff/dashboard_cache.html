@@ -1,0 +1,28 @@
+{% extends 'staff/base.html' %} {% block title %}B2B Customers | Dashboard{% endblock %} {% block content %} {% load staticfiles %} {% load get_range %}
+<div class="container">
+   <div class="text-center">
+       <h1>Cache Manager</h1>
+       <hr>
+       <div class="table-responsive">
+           <table class="table">
+               <tbody>
+                   <tr>
+                       <td>
+                           <div class="h3">All Cache</div>
+                       </td>
+                       <td>
+                           <form method="POST" action="{%url 'staff_dashboard_cache'%}">
+                               {% csrf_token %}
+                               <div class="text-center">
+                                   <button type="submit" name="submit" value="all" class="btn btn-primary btn-raised">REFRESH</button>
+                               </div>
+                           </form>
+                       </td>
+                   </tr>
+               </tbody>
+           </table>
+       </div>
+   </div>
+</div>
+
+{% endblock %}

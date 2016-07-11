@@ -1,0 +1,80 @@
+{% extends 'b2b/base.html' %} {% block title %}Dashboard{% endblock %} {% block content %} {% load staticfiles %} {% load get_range %}
+<div class="container">
+    <div class="text-center">
+        <div class="h1">{{incharge.b_entity.name}} Customers</div>
+    </div>
+    <div class="container">
+        <div class="text-center">
+            <ul class="pagination">
+                {% if customers.has_previous %}
+                    <li>
+                        <a href="?page={{ customers.previous_page_number }}">«</a>
+                    </li>
+                {% endif %}
+                {% for i in customers.paginator.num_pages|get_range %}
+                    {% if i > 0 %}
+                    <li {% if customers.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if customers.has_next %}
+                    <li>
+                        <a href="?page={{ customers.next_page_number }}">»</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover text-center gg-table">
+                <thead>
+                    <tr>
+                        <td colspan="3">
+                            <div class="h4">Customer</div>
+                        </td>
+                        <td colspan="2">
+                            <div class="h4">Latest Feedback</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>No. of Feedbacks</td>
+                        <td>Comment</td>
+                        <td>Timestamp</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers%}
+                    <tr>
+                        <td><a href="{%url 'dashboard_customer' customer.customer.pk %}">{{customer.customer.get_full_name|title}}</a></td>
+                        <td>{{customer.customer.email}}</td>
+                        <td>{{customer.nb_feedbacks}}</td>
+                        <td>{{customer.feedback.comment}}</td>
+                        <td>{{customer.feedback.timestamp}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                {% if customers.has_previous %}
+                    <li>
+                        <a href="?page={{ customers.previous_page_number }}">«</a>
+                    </li>
+                {% endif %}
+                {% for i in customers.paginator.num_pages|get_range %}
+                    {% if i > 0 %}
+                    <li {% if customers.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if customers.has_next %}
+                    <li>
+                        <a href="?page={{ customers.next_page_number }}">»</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

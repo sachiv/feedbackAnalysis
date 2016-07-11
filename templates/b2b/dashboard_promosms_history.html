@@ -1,0 +1,29 @@
+{% extends 'b2b/base.html' %} {% block title %}Promo SMS History | Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="text-center">
+        <h1>PROMO SMS HISTORY</h1>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>TEMPLATE</th>
+                    <th>CONTENT</th>
+                    <th>NO. OF SMS</th>
+                    <th>TIMESTAMP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for promo in promos %}
+                <tr>
+                    <td>{{promo.promo_sms.title}}</td>
+                    <td>{{promo.promo_sms.content}}</td>
+                    <td>{{promo.nb_sms}}</td>
+                    <td>{{promo.created_at}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'staff/base.html' %} {% block title %}Import | Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="col-sm-offset-3 col-sm-6">
+        {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{error}}
+        </div>
+        {% elif success %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{success}}
+        </div>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <div class="h2">Import Data</div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="{%url 'staff_dashboard_import'%}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <select id="bentity" class="form-control" name="bentity" required>
+                        <option value="-1">Restaurants</option>
+                        <option value="0">All</option>
+                        {% for bentity in bentity_list %}
+                        <option value="{{bentity.pk}}">{{bentity}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-group">
+                        <input type="file" id="fileUpload" multiple="" name="fileUpload">
+                        <div class="input-group">
+                            <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                            <span class="input-group-btn input-group-sm">
+                                <button type="button" class="btn btn-fab btn-fab-mini">
+                                    <i class="material-icons">attach_file</i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="save btn btn-lg btn-primary btn-raised">IMPORT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

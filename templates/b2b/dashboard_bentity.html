@@ -1,0 +1,210 @@
+{% extends 'b2b/base.html' %} {% block title %}Company Dashboard{% endblock %} {% block content %} {% load staticfiles %}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                <div class="h1">{{b_entity.name}}</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="h4">MOBILE: {{b_entity.mobile}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="h4">EMAIL: {{b_entity.email}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="h4">FAX: {{b_entity.fax}}</div>
+                </div>
+                <div class="col-xs-12">
+                    <hr>
+                    <div class="h4">ADDRESS</div>
+                    <div class="h5">{{b_entity.address.street}}</div>
+                    <div class="h5">{{b_entity.address.city}}</div>
+                    <div class="h5">{{b_entity.address.state}}, {{b_entity.address.country}} - {{b_entity.address.zip_code}}</div>
+                </div>
+                <div class="col-xs-12">
+                    <hr>
+                    <div class="h4">CUSTOM QUESTIONS</div>
+                    <div class="h5">{{b_entity.qd1_text}}</div>
+                    <div class="h5">{{b_entity.qd2_text}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <hr>
+                <div class="h2 text-center"><i class="material-icons">&#xE84F;</i> Balance Account</div>
+                <hr>
+                <div class="col-xs-12 h3 text-center">
+                    BALANCE ACCOUNT
+                </div>
+                <div class="col-xs-4 h3 text-center">
+                    ACCOUNT ID
+                    <br>{{ balance_account.account_id }}
+                </div>
+                <div class="col-xs-4 h3 text-center">
+                    BALANCE
+                    <br> Rs. {{ balance_account.balance }}
+                </div>
+                <div class="col-xs-4 h3 text-center">
+                    STATUS
+                    <br>{{ balance_account.status }}
+                </div>
+                <div class="row">
+                    <hr>
+                    <div class="h3 text-center">Assets Account</div>
+                    <hr>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="h4 text-center">
+                            PROMO SMS
+                            <br> BALANCE: {{ asset_account.sms_promo }} | VALIDITY: {{asset_account.sms_promo_validity}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="h4 text-center">
+                            NFA SMS
+                            <br> VALIDITY: {{asset_account.sms_nfa_validity}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="h4 text-center">
+                            THANK YOU SMS
+                            <br> VALIDITY: {{asset_account.sms_thankyou_validity}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                <div class="h3">Alert List</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Name</th>
+                            <th rowspan="2">Mobile</th>
+                            <th rowspan="2">Email</th>
+                            <th colspan="2">NFA</th>
+                            <th colspan="2">Daily Report</th>
+                            <th rowspan="2">Delete</th>
+                        </tr>
+                        <tr>
+                            <th>SMS</th>
+                            <th>Email</th>
+                            <th>SMS</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alert in alert_list %}
+                        <tr>
+                            <td>{{alert.name}}</td>
+                            <td>{{alert.mobile}}</td>
+                            <td>{{alert.email}}</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" class="nfa_sms" data-id="{{alert.pk}}" {% if alert.nfa_sms %}checked{% endif %}>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" class="nfa_email" data-id="{{alert.pk}}" {% if alert.nfa_email %}checked{% endif %}>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" class="daily_report_sms" data-id="{{alert.pk}}" {% if alert.daily_report_sms %}checked{% endif %}>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" class="daily_report_email" data-id="{{alert.pk}}" {% if alert.daily_report_email %}checked{% endif %}>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <form method="POST" action="{%url 'dashboard_bentity'%}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="nfa_pk" value="{{alert.pk}}">
+                                    <button type="submit" name="submit" value="delete_alert_list" class="btn btn-danger btn-fab btn-fab-mini" title="Delete"><i class="material-icons">&#xE872;</i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <form method="POST" action="{%url 'dashboard_bentity'%}">
+                {% csrf_token %}
+                <div class="col-xs-12 col-md-offset-3 col-md-6">
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="name">Name of User*</label>
+                        <input class="form-control" maxlength="100" id="name" name="name" type="text" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="mobile">Mobile*</label>
+                        <input class="form-control" pattern="^[789]\d{9}$" id="mobile" name="mobile" type="text" maxlength="10" required>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="email">Email*</label>
+                        <input class="form-control" id="email" name="email" type="email" maxlength="100" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="nfa_sms" checked> NFA SMS
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="nfa_email" checked> NFA Email
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="daily_report_sms" checked> Daily Report SMS
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="daily_report_email" checked> Daily Report EMail
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <button name="submit" value="add_alert_list" type="submit" class="btn btn-primary btn-raised">
+                        ADD
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="btn-abso">
+    <a href="{% url 'dashboard_bentity_edit' %}" class="btn btn-primary btn-fab"><i class="material-icons">&#xE3C9;</i></a>
+</div>
+
+{% endblock %}
